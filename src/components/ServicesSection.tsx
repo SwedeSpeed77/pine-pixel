@@ -49,7 +49,7 @@ const SERVICES = [
     num: "04",
     icon: "🛡",
     title: "Monthly Care Plans",
-    sub: "$99/month. Hosting, updates, edits — handled.",
+    sub: "$127/month. Hosting, updates, edits — handled.",
     bullets: [
       "Hosting included",
       "One update or edit per month",

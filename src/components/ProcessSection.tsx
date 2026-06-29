@@ -33,7 +33,7 @@ const STEPS = [
   {
     num: "05",
     title: "We keep it up.",
-    desc: "$99/month and you never worry about your website again. Hosting, updates, edits — all handled. Forever.",
+    desc: "$127/month and you never worry about your website again. Hosting, updates, edits — all handled. Forever.",
     tag: "Ongoing",
   },
 ];
