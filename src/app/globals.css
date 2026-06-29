@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void:         #05080A;
+  --color-forest:       #0B1810;
+  --color-pine:         #163020;
+  --color-moss:         #264A30;
+  --color-pixel:        #84CC16;
+  --color-pixel-bright: #A3E635;
+  --color-cream:        #E8F2E8;
+  --color-muted:        #6B837A;
+  --color-bark:         #3D2A1A;
+  --color-pixel-dim:    rgba(132, 204, 22, 0.12);
+  --color-pixel-glow:   rgba(132, 204, 22, 0.06);
+}
+
+@theme inline {
+  --color-background:        var(--background);
+  --color-foreground:        var(--foreground);
+  --color-primary:           var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted-foreground:  var(--muted-foreground);
+  --color-card:              var(--card);
+  --color-card-foreground:   var(--card-foreground);
+  --color-border:            var(--border);
+  --font-display: var(--font-syne);
+  --font-sans:    var(--font-inter);
+  --font-serif:   var(--font-syne);
+}
+
+:root {
+  --background:          #05080A;
+  --foreground:          #E8F2E8;
+  --primary:             #84CC16;
+  --primary-foreground:  #05080A;
+  --muted-foreground:    #6B837A;
+  --card:                #0B1810;
+  --card-foreground:     #E8F2E8;
+  --border:              rgba(132, 204, 22, 0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background-color: #05080A;
+}
+
+body {
+  background-color: #05080A;
+  color: #E8F2E8;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Grain texture */
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9000;
+  animation: grain 8s steps(10) infinite;
+  mix-blend-mode: overlay;
+  will-change: transform;
+}
+
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  10%     { transform: translate(-5%,-10%); }
+  20%     { transform: translate(-15%,5%); }
+  30%     { transform: translate(7%,-25%); }
+  40%     { transform: translate(-5%,25%); }
+  50%     { transform: translate(-15%,10%); }
+  60%     { transform: translate(15%,0%); }
+  70%     { transform: translate(0%,15%); }
+  80%     { transform: translate(3%,35%); }
+  90%     { transform: translate(-10%,10%); }
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes ticker-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: #05080A; }
+::-webkit-scrollbar-thumb  { background: #84CC16; border-radius: 2px; }
+
+::selection { background: rgba(132,204,22,0.28); color: #E8F2E8; }
+
+.font-display { font-family: var(--font-syne), 'Syne', system-ui, sans-serif; }
+.font-sans    { font-family: var(--font-inter), system-ui, sans-serif; }
+
+.pixel-underline { position: relative; display: inline-block; }
+.pixel-underline::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 1.5px;
+  background: linear-gradient(90deg, #84CC16, #A3E635);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.23,1,0.32,1);
+}
+.pixel-underline:hover::after { transform: scaleX(1); }
+
+.section-divider {
+  width: 32px; height: 2px;
+  background: linear-gradient(90deg, #84CC16, #A3E635);
+  border-radius: 2px;
+}
+
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(132,204,22,0.1) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { animation: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
