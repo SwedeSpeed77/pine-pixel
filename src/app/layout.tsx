@@ -49,25 +49,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${inter.variable}`}>
       <body>
-        {/* Skip navigation — first element, visible on keyboard focus (ADA/WCAG 2.1) */}
-        <a
-          href="#main-content"
-          style={{
-            position: "absolute",
-            left: "-9999px",
-            top: "1rem",
-            zIndex: 9999,
-            padding: "0.5rem 1rem",
-            background: "#84CC16",
-            color: "#05080A",
-            fontWeight: 600,
-            borderRadius: "0.375rem",
-            textDecoration: "none",
-            fontSize: "0.875rem",
-          }}
-          onFocus={(e) => { e.currentTarget.style.left = "1rem"; }}
-          onBlur={(e) => { e.currentTarget.style.left = "-9999px"; }}
-        >
+        {/* Skip navigation — visible on keyboard focus only (ADA/WCAG 2.1) */}
+        <a href="#main-content" className="skip-nav">
           Skip to main content
         </a>
 
