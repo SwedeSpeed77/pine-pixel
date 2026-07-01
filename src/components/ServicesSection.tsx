@@ -2,13 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Monitor, Zap, RefreshCw, Shield, MapPin, Share2 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 const E: [number, number, number, number] = [0.23, 1, 0.32, 1];
 
-const SERVICES = [
+const SERVICES: { Icon: LucideIcon; title: string; sub: string; bullets: string[] }[] = [
   {
-    num: "01",
-    icon: "⬛",
+    Icon: Monitor,
     title: "Custom Websites",
     sub: "Built for your business, not borrowed from a template.",
     bullets: [
@@ -20,8 +21,7 @@ const SERVICES = [
     ],
   },
   {
-    num: "02",
-    icon: "⚡",
+    Icon: Zap,
     title: "AI-Powered Speed",
     sub: "Faster builds mean lower prices. You benefit directly.",
     bullets: [
@@ -33,8 +33,7 @@ const SERVICES = [
     ],
   },
   {
-    num: "03",
-    icon: "🔄",
+    Icon: RefreshCw,
     title: "Site Redesigns",
     sub: "Got a rough GoDaddy template? I'll rebuild it properly.",
     bullets: [
@@ -46,8 +45,7 @@ const SERVICES = [
     ],
   },
   {
-    num: "04",
-    icon: "🛡",
+    Icon: Shield,
     title: "Monthly Care Plans",
     sub: "$127/month. Hosting, updates, edits — handled.",
     bullets: [
@@ -59,8 +57,7 @@ const SERVICES = [
     ],
   },
   {
-    num: "05",
-    icon: "🔍",
+    Icon: MapPin,
     title: "Local SEO Basics",
     sub: "Get found when people search nearby.",
     bullets: [
@@ -72,8 +69,7 @@ const SERVICES = [
     ],
   },
   {
-    num: "06",
-    icon: "📱",
+    Icon: Share2,
     title: "Social Content",
     sub: "Monthly posts written and scheduled for your business.",
     bullets: [
@@ -112,22 +108,13 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
         (e.currentTarget as HTMLDivElement).style.boxShadow   = "none";
       }}
     >
-      {/* Number */}
-      <span
-        className="absolute top-5 right-5 font-display font-bold text-xs tracking-widest"
-        style={{ color: "rgba(132,204,22,0.2)" }}
-        aria-hidden="true"
-      >
-        {service.num}
-      </span>
-
       {/* Icon */}
       <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
+        className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
         style={{ background: "rgba(132,204,22,0.08)", border: "1px solid rgba(132,204,22,0.15)" }}
         aria-hidden="true"
       >
-        {service.icon}
+        <service.Icon style={{ width: 18, height: 18, color: "#84CC16" }} />
       </div>
 
       {/* Text */}
@@ -198,7 +185,7 @@ export default function ServicesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {SERVICES.map((s, i) => (
-            <ServiceCard key={s.num} service={s} index={i} />
+            <ServiceCard key={s.title} service={s} index={i} />
           ))}
         </div>
       </div>

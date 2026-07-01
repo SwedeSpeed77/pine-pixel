@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 /* ─── Brand / tech logos Pine & Pixel actually uses ─────────────────────── */
 
@@ -207,11 +207,9 @@ export function PixelHero({
   onSecondaryClick,
   secondaryHref = "#portfolio",
 }: PixelHeroProps) {
-  const [isLoaded, setIsLoaded]       = useState(false);
   const [pixelColors, setPixelColors] = useState<string[]>([]);
 
   useEffect(() => {
-    /* Pine green pixel palette — 4 dark moss shades + 1 lime burst */
     setPixelColors([
       "rgba(22, 48, 32, 0.9)",
       "rgba(26, 58, 34, 0.7)",
@@ -219,9 +217,9 @@ export function PixelHero({
       "rgba(22, 48, 32, 0.8)",
       "rgba(132, 204, 22, 0.65)",
     ]);
-    const t = setTimeout(() => setIsLoaded(true), 50);
-    return () => clearTimeout(t);
   }, []);
+
+  const E: [number, number, number, number] = [0.23, 1, 0.32, 1];
 
   return (
     <div
@@ -235,29 +233,6 @@ export function PixelHero({
           100% { transform: translateX(-50%); }
         }
         .pp-marquee { animation: marquee-pp 28s linear infinite; }
-
-        .pp-glass-text {
-          color: transparent;
-          background: linear-gradient(
-            135deg,
-            rgba(132,204,22,1)    0%,
-            rgba(232,242,232,0.9) 20%,
-            rgba(163,230,53,0.5)  42%,
-            rgba(232,242,232,0.95) 55%,
-            rgba(132,204,22,0.6)  75%,
-            rgba(163,230,53,1)    100%
-          );
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-stroke: 1px rgba(132,204,22,0.2);
-          filter: drop-shadow(0 12px 32px rgba(132,204,22,0.18)) drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-          animation: pp-shimmer 7s linear infinite;
-        }
-        @keyframes pp-shimmer {
-          0%   { background-position: 200% center; }
-          100% { background-position: 0% center; }
-        }
       `}</style>
 
       {/* Pixel canvas layer */}
@@ -269,13 +244,24 @@ export function PixelHero({
       {/* Headline */}
       <div className="flex flex-col items-center justify-center text-center order-1 mt-28 sm:mt-0 pointer-events-none w-full">
         <h1
-          className="pp-glass-text flex flex-row items-center justify-center gap-2 sm:gap-4 px-1 w-full flex-wrap leading-none"
-          style={{ fontSize: "clamp(3rem, 11vw, 9rem)" }}
+          className="flex flex-row items-center justify-center gap-2 sm:gap-4 px-1 w-full flex-wrap leading-none"
+          style={{ fontSize: "clamp(3rem, 8.5vw, 6rem)" }}
         >
-          <span style={{ fontFamily: "var(--font-syne)", fontWeight: 800, fontStyle: "italic" }}>
+          <span style={{
+            fontFamily: "var(--font-syne)",
+            fontWeight: 800,
+            fontStyle: "italic",
+            color: "#E8F2E8",
+          }}>
             {word1}
           </span>
-          <span style={{ fontFamily: "var(--font-syne)", fontWeight: 800, letterSpacing: "-0.04em" }}>
+          <span style={{
+            fontFamily: "var(--font-syne)",
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
+            color: "#84CC16",
+            textShadow: "0 0 48px rgba(132,204,22,0.35)",
+          }}>
             {word2}
           </span>
         </h1>
@@ -292,9 +278,6 @@ export function PixelHero({
 
         {/* Mobile marquee */}
         <div className="block md:hidden w-full mt-12 pointer-events-auto">
-          <div className="text-[10px] uppercase tracking-[0.24em] mb-4" style={{ color: "rgba(132,204,22,0.55)" }}>
-            Built with
-          </div>
           <div className="relative w-full overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)" }}>
             <div className="flex w-max gap-10 py-1 pp-marquee">
               <div className="flex gap-10 items-center">{BRAND_LOGOS.map((L, i) => <L key={i} />)}</div>
@@ -305,12 +288,11 @@ export function PixelHero({
       </div>
 
       {/* CTA row */}
-      <div
-        className={cn(
-          "pointer-events-auto flex flex-row items-center justify-center gap-3 mt-4 md:mt-10 mb-4 md:mb-0 order-4 md:order-3 transition-all duration-1000 px-1",
-          isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        )}
-        style={{ transitionDelay: "450ms" }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, ease: E, delay: 0.5 }}
+        className="pointer-events-auto flex flex-row items-center justify-center gap-3 mt-4 md:mt-10 mb-4 md:mb-0 order-4 md:order-3 px-1"
       >
         <button
           onClick={onPrimaryClick}
@@ -349,19 +331,15 @@ export function PixelHero({
           <span className="inline md:hidden">{secondaryCtaMobile}</span>
           <span className="hidden md:inline">{secondaryCta}</span>
         </a>
-      </div>
+      </motion.div>
 
       {/* Desktop marquee — pinned to bottom */}
-      <div
-        className={cn(
-          "hidden md:flex absolute bottom-8 left-0 right-0 w-full z-10 pointer-events-auto flex-col items-center gap-4 transition-all duration-1000 order-3 md:order-4",
-          isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        )}
-        style={{ transitionDelay: "600ms" }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, ease: E, delay: 0.65 }}
+        className="hidden md:flex absolute bottom-8 left-0 right-0 w-full z-10 pointer-events-auto flex-col items-center gap-4 order-3 md:order-4"
       >
-        <span className="text-[10px] uppercase tracking-[0.28em] select-none" style={{ color: "rgba(132,204,22,0.5)" }}>
-          Built with
-        </span>
         <div
           className="relative w-full max-w-4xl overflow-hidden"
           style={{ maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)" }}
@@ -371,7 +349,7 @@ export function PixelHero({
             <div className="flex gap-14 items-center" aria-hidden="true">{BRAND_LOGOS.map((L, i) => <L key={`c-${i}`} />)}</div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

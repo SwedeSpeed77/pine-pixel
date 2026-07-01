@@ -2,41 +2,78 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Gift, Cpu, Sparkles, Paintbrush, Globe, Clock } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 const E: [number, number, number, number] = [0.23, 1, 0.32, 1];
 
-const DIFFERENTIATORS = [
+const DIFFERENTIATORS: { Icon: LucideIcon; title: string; desc: string }[] = [
   {
-    icon: "🆓",
+    Icon: Gift,
     title: "Free demo built first.",
     desc: "You see it. You love it. Then we talk. No commitment, no invoice.",
   },
   {
-    icon: "⚡",
+    Icon: Cpu,
     title: "AI-powered everything.",
     desc: "Research, copywriting, 24/7 chatbot — faster builds, smarter sites, you benefit directly.",
   },
   {
-    icon: "✨",
+    Icon: Sparkles,
     title: "Framer Motion & GSAP.",
     desc: "Premium animations on every site. The kind of feel that makes visitors stop scrolling.",
   },
   {
-    icon: "🎨",
+    Icon: Paintbrush,
     title: "Nothing templated. Ever.",
     desc: "Every site is built for that specific business only. Period.",
   },
   {
-    icon: "🌐",
+    Icon: Globe,
     title: "Fully remote.",
     desc: "Built for businesses across multiple states. Doesn't matter where you are.",
   },
   {
-    icon: "⏰",
+    Icon: Clock,
     title: "Available 24/7.",
     desc: "Text me at midnight if something's wrong. I'll be there.",
   },
 ];
+
+function DiffItem({ diff, index }: { diff: typeof DIFFERENTIATORS[0]; index: number }) {
+  const ref    = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 16 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: (index % 2) * 0.07, duration: 0.55, ease: E }}
+      className="flex items-start gap-4"
+    >
+      <div
+        className="flex-shrink-0 mt-0.5 rounded-xl flex items-center justify-center"
+        style={{
+          width: 36, height: 36,
+          background: "rgba(132,204,22,0.08)",
+          border: "1px solid rgba(132,204,22,0.18)",
+        }}
+        aria-hidden="true"
+      >
+        <diff.Icon style={{ width: 16, height: 16, color: "#84CC16" }} />
+      </div>
+      <div>
+        <h3 className="font-sans font-semibold text-sm mb-1" style={{ color: "#E8F2E8" }}>
+          {diff.title}
+        </h3>
+        <p className="text-sm font-sans leading-relaxed" style={{ color: "rgba(232,242,232,0.5)" }}>
+          {diff.desc}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function AboutSection() {
   const headRef    = useRef(null);
@@ -182,47 +219,10 @@ export default function AboutSection() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {DIFFERENTIATORS.map((d, i) => {
-            const dRef    = useRef(null);
-            const dInView = useInView(dRef, { once: true, margin: "-50px" });
-
-            return (
-              <motion.div
-                key={d.title}
-                ref={dRef}
-                initial={{ opacity: 0, y: 20 }}
-                animate={dInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: (i % 3) * 0.08, duration: 0.6, ease: E }}
-                className="flex items-start gap-4 p-5 rounded-2xl transition-all duration-300"
-                style={{
-                  background: "rgba(11,24,16,0.5)",
-                  border: "1px solid rgba(132,204,22,0.08)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(132,204,22,0.25)";
-                  (e.currentTarget as HTMLDivElement).style.background   = "rgba(11,24,16,0.85)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(132,204,22,0.08)";
-                  (e.currentTarget as HTMLDivElement).style.background   = "rgba(11,24,16,0.5)";
-                }}
-              >
-                <span className="text-xl flex-shrink-0 mt-0.5" aria-hidden="true">{d.icon}</span>
-                <div>
-                  <h3
-                    className="font-sans font-semibold text-sm mb-1"
-                    style={{ color: "#E8F2E8" }}
-                  >
-                    {d.title}
-                  </h3>
-                  <p className="text-xs font-sans leading-relaxed" style={{ color: "rgba(232,242,232,0.5)" }}>
-                    {d.desc}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-7">
+          {DIFFERENTIATORS.map((d, i) => (
+            <DiffItem key={d.title} diff={d} index={i} />
+          ))}
         </div>
       </div>
     </section>

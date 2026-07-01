@@ -71,8 +71,17 @@ export default function Footer() {
               Jacob Brown · Isanti, MN
             </div>
             <a
+              href="tel:+16514200670"
+              className="mt-1 text-xs font-sans transition-colors duration-200 block"
+              style={{ color: "rgba(232,242,232,0.4)" }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#E8F2E8"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(232,242,232,0.4)"; }}
+            >
+              651-420-0670
+            </a>
+            <a
               href="mailto:Swedespeedjb@gmail.com"
-              className="mt-1 text-xs font-sans transition-colors duration-200"
+              className="mt-0.5 text-xs font-sans transition-colors duration-200 block"
               style={{ color: "rgba(132,204,22,0.6)" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#84CC16"; }}
               onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(132,204,22,0.6)"; }}

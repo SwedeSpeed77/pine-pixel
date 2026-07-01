@@ -143,22 +143,51 @@ export default function ContactSection() {
               ))}
             </ul>
 
-            <div className="mt-10 pt-8" style={{ borderTop: "1px solid rgba(132,204,22,0.1)" }}>
-              <div className="text-[10px] tracking-[0.24em] uppercase font-sans mb-2" style={{ color: "rgba(232,242,232,0.3)" }}>
-                Or email directly
+            <div className="mt-10 pt-8 flex flex-col gap-5" style={{ borderTop: "1px solid rgba(132,204,22,0.1)" }}>
+              <div>
+                <div className="text-[10px] tracking-[0.24em] uppercase font-sans mb-2" style={{ color: "rgba(232,242,232,0.3)" }}>
+                  Reach out directly
+                </div>
+                <a
+                  href="tel:+16514200670"
+                  className="font-display font-semibold text-lg transition-colors duration-200 block"
+                  style={{ color: "#E8F2E8" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#84CC16"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#E8F2E8"; }}
+                >
+                  651-420-0670
+                </a>
+                <a
+                  href="mailto:Swedespeedjb@gmail.com"
+                  className="font-sans text-sm transition-colors duration-200 block mt-0.5"
+                  style={{ color: "rgba(132,204,22,0.75)" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#84CC16"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(132,204,22,0.75)"; }}
+                >
+                  Swedespeedjb@gmail.com
+                </a>
+                <p className="text-xs font-sans mt-2" style={{ color: "rgba(232,242,232,0.3)" }}>
+                  Usually respond same day.
+                </p>
               </div>
-              <a
-                href="mailto:Swedespeedjb@gmail.com"
-                className="font-display font-semibold text-lg transition-colors duration-200"
-                style={{ color: "#84CC16" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#A3E635"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#84CC16"; }}
+
+              {/* Location badge */}
+              <div
+                className="inline-flex items-center gap-3 px-4 py-3 rounded-xl self-start"
+                style={{
+                  background: "rgba(132,204,22,0.05)",
+                  border: "1px solid rgba(132,204,22,0.14)",
+                }}
               >
-                Swedespeedjb@gmail.com
-              </a>
-              <p className="text-xs font-sans mt-1" style={{ color: "rgba(232,242,232,0.35)" }}>
-                Usually respond same day.
-              </p>
+                <svg viewBox="0 0 24 24" fill="none" style={{ width: 16, height: 16, flexShrink: 0, color: "#84CC16" }} stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 21c-4.4-4.4-7-8.3-7-11a7 7 0 0 1 14 0c0 2.7-2.6 6.6-7 11z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+                <div>
+                  <div className="text-xs font-sans font-medium" style={{ color: "#E8F2E8" }}>Isanti, MN</div>
+                  <div className="text-[10px] font-sans" style={{ color: "rgba(232,242,232,0.35)" }}>45.4897° N · 93.2433° W · Serving nationwide</div>
+                </div>
+              </div>
             </div>
           </motion.div>
 
