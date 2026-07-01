@@ -131,6 +131,19 @@ body::after {
   background-size: 32px 32px;
 }
 
+/* Skeleton shimmer */
+@keyframes pp-skeleton {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* Visible focus ring for keyboard navigation (ADA) */
+:focus-visible {
+  outline: 2px solid #84CC16;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   body::after { animation: none; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }

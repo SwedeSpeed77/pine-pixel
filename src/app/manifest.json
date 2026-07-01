@@ -1,0 +1,16 @@
+{
+  "name": "Pine & Pixel — Web Design",
+  "short_name": "Pine & Pixel",
+  "description": "Custom-built websites for small businesses. No templates. AI-powered speed. Free demo first, always.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05080A",
+  "theme_color": "#84CC16",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

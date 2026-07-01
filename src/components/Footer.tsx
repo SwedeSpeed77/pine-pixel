@@ -117,9 +117,26 @@ export default function Footer() {
           <p className="text-xs font-sans" style={{ color: "rgba(232,242,232,0.25)" }}>
             © 2026 Pine & Pixel · Remote web design · Available 24/7
           </p>
-          <p className="text-xs font-sans" style={{ color: "rgba(132,204,22,0.35)" }}>
-            Jacob Brown · Isanti, MN
-          </p>
+
+          {/* Legal links — required for ADA + privacy law compliance */}
+          <nav aria-label="Legal" className="flex items-center gap-4">
+            {[
+              { href: "/privacy", label: "Privacy Policy" },
+              { href: "/terms", label: "Terms" },
+              { href: "/accessibility", label: "Accessibility" },
+            ].map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                className="text-xs font-sans transition-colors duration-200"
+                style={{ color: "rgba(132,204,22,0.4)", textDecoration: "none" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "#84CC16"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = "rgba(132,204,22,0.4)"; }}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>
